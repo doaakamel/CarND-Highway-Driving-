@@ -1,0 +1,20 @@
+The implentation is divided into three parts
+First I tried to make the car moves in it's lane:
+This part is handleded from line 311 to line 400 fisrt in this part first I check if I have points from the previous I add them 
+to my next path,  make sure the velocity doesn't exceed a certain level I have used spline library by this the velocity is no more dependant on the distance between the points instead I can calculate the suitable number of points which is N use it to get the x values and then use the spline object to get the Y values of these x values.
+
+I have limited the jerk and ACC using this conditions from line 280 to 286
+
+                      for( int i = 1; i < 50 - prev_size; i++ ) {
+                        ref_vel += vel_diff;
+                        if ( ref_vel > VELMAX ) {
+                          ref_vel = VELMAX;
+                        } else if ( ref_vel < ACCMAX ) {
+                          ref_vel = ACCMAX;
+                        }
+
+Secondly collision avoidance:
+this part starts from line 245 to 305,using sensor fusion first I distance d for each of the near cars,then use the car lane flag to determine the position 
+of the car if in our lane or in the left or right then the car decides to take a descion based on the car the position this starts from line 284 in this state the car checks for the valid options for each situation for example if there is infront of it in the there no car in the left then go left  if there is a left lane else chechk for the right if there no car and there is a right lane then go right.
+
+
